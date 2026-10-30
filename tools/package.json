@@ -1,0 +1,11 @@
+{
+  "name": "ets-burger-tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync": "node sync-menu.mjs"
+  },
+  "dependencies": {
+    "sharp": "0.33.5"
+  }
+}
