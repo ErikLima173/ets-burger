@@ -12,9 +12,38 @@
 
   document.documentElement.classList.add("js");
 
+  /* ---------- Perfil de desempenho ----------
+     Máquina fraca começa no modo leve. As demais medem o FPS na entrada
+     e caem para o modo leve se não aguentarem. ?lite e ?full forçam um modo. */
+  const params = new URLSearchParams(location.search);
+  const weakHardware = (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4 || !!(navigator.connection && navigator.connection.saveData);
+  let lite = params.has("full") ? false : params.has("lite") || reduced || weakHardware;
+  const onLite = [];
+  function goLite() {
+    if (lite) return;
+    lite = true;
+    document.documentElement.classList.add("perf-lite");
+    onLite.forEach((fn) => fn());
+  }
+  if (lite) document.documentElement.classList.add("perf-lite");
+
+  function probeFps() {
+    if (lite || params.has("full")) return;
+    setTimeout(() => {
+      if (document.hidden) return;
+      let frames = 0;
+      const start = performance.now();
+      (function count(now) {
+        frames++;
+        if (now - start < 2000) return requestAnimationFrame(count);
+        if (!document.hidden && frames / ((now - start) / 1000) < 40) goLite();
+      })(start);
+    }, 1200);
+  }
+
   /* ---------- Links e dados comerciais ---------- */
   const waLink = (text) => `https://wa.me/${D.links.whatsappNumero}?text=${encodeURIComponent(text)}`;
-  const waHello = waLink("Olá, ET's Burger! Vim pelo site e quero fazer um pedido 🛸");
+  const waHello = waLink("Olá, ET's Burger! Vim pelo site e quero fazer um pedido.");
 
   function bindData() {
     $$("[data-href]").forEach((a) => { const url = D.links[a.dataset.href]; if (url) a.href = url; });
@@ -50,34 +79,35 @@
   function cosmos() {
     const cv = $(".cosmos");
     const ctx = cv.getContext("2d");
-    const dpr = Math.min(devicePixelRatio || 1, 1.5);
-    let w, h, stars = [], mx = 0, my = 0, tmx = 0, tmy = 0, shoot = null, running = true;
+    const dpr = Math.min(devicePixelRatio || 1, 1.25);
+    let w, h, stars = [], mx = 0, my = 0, tmx = 0, tmy = 0, shoot = null, running = true, last = 0;
+    const still = () => reduced || lite;
     const colors = ["244,244,244", "244,244,244", "244,244,244", "183,255,53", "53,217,255"];
 
     function resize() {
       w = innerWidth; h = innerHeight;
       cv.width = w * dpr; cv.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const count = Math.min(Math.round((w * h) / (mobileQ.matches ? 9000 : 6500)), 280);
+      const count = Math.min(Math.round((w * h) / (mobileQ.matches ? 12000 : 9000)), 160);
       stars = Array.from({ length: count }, () => ({
         x: Math.random() * w, y: Math.random() * h, z: Math.random() * .8 + .2,
         r: Math.random() * 1.3 + .2, p: Math.random() * Math.PI * 2, c: colors[(Math.random() * colors.length) | 0]
       }));
-      if (reduced) draw(0);
+      if (still()) draw(0);
     }
 
     function draw(t) {
       ctx.clearRect(0, 0, w, h);
       mx += (tmx - mx) * .05; my += (tmy - my) * .05;
-      const sy = scrollY * .08;
+      const sy = still() ? 0 : scrollY * .08;
       for (const s of stars) {
         const x = (s.x + mx * s.z * 26 + w) % w;
         const y = ((s.y - sy * s.z + my * s.z * 18) % h + h) % h;
-        const a = reduced ? .7 : .35 + Math.sin(t * .002 * s.z + s.p) * .35 + .3;
+        const a = still() ? .7 : .35 + Math.sin(t * .002 * s.z + s.p) * .35 + .3;
         ctx.fillStyle = `rgba(${s.c},${Math.max(.08, a) * s.z})`;
         ctx.beginPath(); ctx.arc(x, y, s.r * (s.z + .3), 0, 6.283); ctx.fill();
       }
-      if (!reduced) {
+      if (!still()) {
         if (!shoot && Math.random() < .004) shoot = { x: Math.random() * w * .7 + w * .3, y: Math.random() * h * .4, l: 0 };
         if (shoot) {
           shoot.l += 14;
@@ -91,10 +121,15 @@
       }
     }
 
-    function loop(t) { if (running) draw(t); requestAnimationFrame(loop); }
+    // 30 quadros por segundo bastam para estrelas piscando
+    function loop(t) {
+      if (still()) return draw(0);
+      if (running && t - last > 33) { last = t; draw(t); }
+      requestAnimationFrame(loop);
+    }
     resize();
     addEventListener("resize", resize);
-    if (!reduced) {
+    if (!still()) {
       addEventListener("pointermove", (e) => { tmx = e.clientX / w - .5; tmy = e.clientY / h - .5; }, { passive: true });
       document.addEventListener("visibilitychange", () => (running = !document.hidden));
       requestAnimationFrame(loop);
@@ -104,8 +139,8 @@
   /* ---------- Palco do hero: órbita, partículas, parallax ---------- */
   function heroStage() {
     const parts = $("[data-particles]");
-    if (parts && !reduced) {
-      for (let i = 0; i < (mobileQ.matches ? 10 : 18); i++) {
+    if (parts && !reduced && !lite) {
+      for (let i = 0; i < (mobileQ.matches ? 6 : 12); i++) {
         const p = document.createElement("i");
         p.style.left = `${Math.random() * 100}%`;
         p.style.animationDuration = `${2.5 + Math.random() * 3}s`;
@@ -117,8 +152,7 @@
 
     const orbit = $("[data-orbit]");
     const orbiters = $$("[data-orbiter]");
-    let visible = true;
-    new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe($(".hero"));
+    let visible = true, ticking = false;
 
     function place(t) {
       const rx = orbit.clientWidth * .52, ry = orbit.clientHeight * .14;
@@ -130,18 +164,33 @@
         o.style.opacity = .55 + (s + 1) * .225;
       });
     }
-    if (reduced) { place(0); return; }
-    (function tick(t) { if (visible) place(t); requestAnimationFrame(tick); })(0);
+    // A órbita só gira com o hero na tela
+    function tick(t) {
+      if (!visible || lite || reduced) { ticking = false; return; }
+      place(t);
+      requestAnimationFrame(tick);
+    }
+    const startOrbit = () => { if (!ticking && !lite && !reduced) { ticking = true; requestAnimationFrame(tick); } };
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) startOrbit(); }).observe($(".hero"));
+    place(0);
+    startOrbit();
 
     if (!finePointer) return;
+    // Parallax: o loop roda enquanto o mouse se move e dorme quando as camadas assentam
     const layers = $$(".hero [data-depth]");
-    let tx = 0, ty = 0, cx = 0, cy = 0;
-    $(".hero").addEventListener("pointermove", (e) => { tx = e.clientX / innerWidth - .5; ty = e.clientY / innerHeight - .5; });
-    (function follow() {
-      cx += (tx - cx) * .06; cy += (ty - cy) * .06;
-      if (visible) layers.forEach((l) => { const d = +l.dataset.depth; l.style.translate = `${-cx * d * 30}px ${-cy * d * 20}px`; });
-      requestAnimationFrame(follow);
-    })();
+    let tx = 0, ty = 0, cx = 0, cy = 0, following = false;
+    function follow() {
+      cx += (tx - cx) * .08; cy += (ty - cy) * .08;
+      layers.forEach((l) => { const d = +l.dataset.depth; l.style.translate = `${-cx * d * 30}px ${-cy * d * 20}px`; });
+      if (!lite && visible && (Math.abs(tx - cx) > .001 || Math.abs(ty - cy) > .001)) requestAnimationFrame(follow);
+      else following = false;
+    }
+    $(".hero").addEventListener("pointermove", (e) => {
+      if (lite || reduced) return;
+      tx = e.clientX / innerWidth - .5; ty = e.clientY / innerHeight - .5;
+      if (!following) { following = true; requestAnimationFrame(follow); }
+    });
+    onLite.push(() => layers.forEach((l) => (l.style.translate = "")));
   }
 
   /* ---------- Cardápio (dados do Cardápio Web + ajustes de marca) ---------- */
@@ -249,6 +298,7 @@
     if (!finePointer || reduced) return;
     $$(".spec").forEach((card) => {
       card.addEventListener("pointermove", (e) => {
+        if (lite) return;
         const r = card.getBoundingClientRect();
         const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
         card.style.setProperty("--mx", `${x * 100}%`); card.style.setProperty("--my", `${y * 100}%`);
@@ -284,7 +334,7 @@
     $("[data-bag-foot]").hidden = count === 0;
     $("[data-bag-total]").textContent = brl(total);
     const lines = ids.map((k) => { const p = PRODUCTS[k]; return `• ${bag[k]}x ${p.nome}${p.subtitulo ? ` (${p.subtitulo})` : ""}: ${p.aPartirDe ? "a partir de " : ""}${brl(p.preco * bag[k])}`; }).join("\n");
-    $("[data-wa-order]").href = waLink(`Olá, ET's Burger! 🛸 Quero fazer este pedido pelo site:\n\n${lines}\n\nSubtotal estimado: ${brl(total)}\n\nNome:\nEntrega ou retirada:\nEndereço:\nForma de pagamento:`);
+    $("[data-wa-order]").href = waLink(`Olá, ET's Burger! Quero fazer este pedido pelo site:\n\n${lines}\n\nSubtotal estimado: ${brl(total)}\n\nNome:\nEntrega ou retirada:\nEndereço:\nForma de pagamento:`);
   }
 
   function visibleBagButton() {
@@ -477,13 +527,23 @@
 
   /* ---------- Cursor e botões magnéticos ---------- */
   function cursor() {
-    if (!finePointer || reduced) return;
+    if (!finePointer || reduced || lite) return;
     document.documentElement.classList.add("has-cursor");
+    onLite.push(() => document.documentElement.classList.remove("has-cursor"));
     const c = $(".cursor"), dot = $(".cursor__dot"), ring = $(".cursor__ring"), label = $(".cursor__label");
-    let x = innerWidth / 2, y = innerHeight / 2, rx = x, ry = y;
-    addEventListener("pointermove", (e) => { x = e.clientX; y = e.clientY; dot.style.transform = `translate(${x}px, ${y}px)`; c.classList.remove("is-hidden"); }, { passive: true });
+    let x = innerWidth / 2, y = innerHeight / 2, rx = x, ry = y, moving = false;
+    // O anel só persegue o ponteiro enquanto ainda não o alcançou
+    function chase() {
+      rx += (x - rx) * .2; ry += (y - ry) * .2;
+      ring.style.transform = `translate(${rx}px, ${ry}px)`;
+      if (Math.abs(x - rx) > .3 || Math.abs(y - ry) > .3) requestAnimationFrame(chase);
+      else moving = false;
+    }
+    addEventListener("pointermove", (e) => {
+      x = e.clientX; y = e.clientY; dot.style.transform = `translate(${x}px, ${y}px)`; c.classList.remove("is-hidden");
+      if (!moving) { moving = true; requestAnimationFrame(chase); }
+    }, { passive: true });
     document.addEventListener("pointerleave", () => c.classList.add("is-hidden"));
-    (function loop() { rx += (x - rx) * .18; ry += (y - ry) * .18; ring.style.transform = `translate(${rx}px, ${ry}px)`; requestAnimationFrame(loop); })();
     document.addEventListener("pointerover", (e) => {
       const el = e.target.closest("a, button, [data-cursor]");
       c.classList.toggle("is-hover", !!el);
@@ -496,6 +556,7 @@
     if (!finePointer || reduced) return;
     $$(".magnetic").forEach((el) => {
       el.addEventListener("pointermove", (e) => {
+        if (lite) return;
         const r = el.getBoundingClientRect();
         el.style.transition = "translate .15s ease-out, background .3s, color .3s, box-shadow .3s, border-color .3s";
         el.style.translate = `${(e.clientX - r.left - r.width / 2) * .25}px ${(e.clientY - r.top - r.height / 2) * .35}px`;
@@ -507,6 +568,7 @@
 
   /* ---------- Títulos divididos em palavras e letras ---------- */
   function splitTitles() {
+    if (lite || reduced) return;
     $$("[data-split]").forEach((el) => {
       el.setAttribute("aria-label", el.textContent.replace(/\s+/g, " ").trim());
       const walk = (node) => {
@@ -548,7 +610,7 @@
     const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
     tl.from(".planet", { scale: .5, opacity: 0, duration: 2, stagger: .15 }, 0)
       .from(".nebula", { opacity: 0, duration: 2 }, 0)
-      .from(".hero__title .w", { yPercent: 70, opacity: 0, rotate: 3, filter: "blur(8px)", duration: 1.1, stagger: .07 }, .15)
+      .from(".hero__title .w", { yPercent: 70, opacity: 0, rotate: 3, duration: 1.1, stagger: .07 }, .15)
       .from(".stage__ufo", { y: -260, x: 120, rotate: -14, opacity: 0, duration: 1.5, ease: "power4.out" }, .3)
       .from(".stage__beam", { opacity: 0, duration: .5, ease: "steps(4)" }, 1.15)
       .from(".porthole", { y: 160, scale: .6, opacity: 0, duration: 1.4 }, 1.2)
@@ -556,13 +618,26 @@
       .from(".award, .orbiter, .hud", { scale: .4, opacity: 0, duration: 1, stagger: .08, ease: "back.out(1.8)", clearProps: "scale" }, 1.6)
       .from(".scroll-cue", { opacity: 0, duration: .8 }, 2);
 
-    // Hero se afasta no scroll
-    gsap.fromTo(".hero__copy", { y: 0, opacity: 1 }, { y: -80, opacity: .2, ease: "none", immediateRender: false, scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
-    gsap.to(".stage", { y: 120, scale: .92, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+    // Efeitos presos ao scroll: recalculam a cada rolagem, então o modo leve não usa
+    const scrubs = [];
+    const scrub = (tween) => scrubs.push(tween);
+    onLite.push(() => scrubs.forEach((tw) => { tw.scrollTrigger && tw.scrollTrigger.kill(); tw.revert(); }));
 
-    // Faixas cruzadas acompanham o scroll
-    gsap.to(".tape--green", { xPercent: -6, ease: "none", scrollTrigger: { trigger: ".tapes", start: "top bottom", end: "bottom top", scrub: true } });
-    gsap.to(".tape--purple", { xPercent: 6, ease: "none", scrollTrigger: { trigger: ".tapes", start: "top bottom", end: "bottom top", scrub: true } });
+    if (!lite) {
+      // Hero se afasta no scroll
+      scrub(gsap.fromTo(".hero__copy", { y: 0, opacity: 1 }, { y: -80, opacity: .2, ease: "none", immediateRender: false, scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } }));
+      scrub(gsap.to(".stage", { y: 120, scale: .92, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } }));
+      // Faixas cruzadas acompanham o scroll
+      scrub(gsap.to(".tape--green", { xPercent: -6, ease: "none", scrollTrigger: { trigger: ".tapes", start: "top bottom", end: "bottom top", scrub: true } }));
+      scrub(gsap.to(".tape--purple", { xPercent: 6, ease: "none", scrollTrigger: { trigger: ".tapes", start: "top bottom", end: "bottom top", scrub: true } }));
+      // Base de pouso em camadas
+      $$("[data-parallax]").forEach((g) => scrub(gsap.fromTo(g, { y: 0 }, { y: +g.dataset.parallax, ease: "none", scrollTrigger: { trigger: ".landing-site", start: "top bottom", end: "bottom top", scrub: true } })));
+      // Decolagem no CTA final
+      scrub(gsap.fromTo(".launch__ship", { y: 160 }, { y: -320, ease: "none", scrollTrigger: { trigger: ".launch", start: "top bottom", end: "bottom top", scrub: true } }));
+      scrub(gsap.fromTo(".launch__thrust", { scaleY: .3, opacity: .2 }, { scaleY: 1.4, opacity: .9, transformOrigin: "top", ease: "none", scrollTrigger: { trigger: ".launch", start: "top bottom", end: "bottom top", scrub: true } }));
+      // Assinatura do rodapé desliza
+      scrub(gsap.fromTo(".base__sign", { xPercent: 8 }, { xPercent: -8, ease: "none", scrollTrigger: { trigger: ".base__sign", start: "top bottom", end: "bottom top", scrub: true } }));
+    }
 
     // Títulos por letra
     $$("[data-split]").forEach((el) => {
@@ -591,19 +666,17 @@
       ScrollTrigger.create({ trigger: m, start: "top 82%", once: true, onEnter: () => m.classList.add("is-on") });
     });
 
-    // Base de pouso em camadas
-    $$("[data-parallax]").forEach((g) => gsap.fromTo(g, { y: 0 }, { y: +g.dataset.parallax, ease: "none", scrollTrigger: { trigger: ".landing-site", start: "top bottom", end: "bottom top", scrub: true } }));
-
     // Medidor de satisfação
     ScrollTrigger.create({ trigger: meterTarget, start: "top 80%", once: true, onEnter: () => fillMeter(avg) });
 
-    // Decolagem no CTA final
-    gsap.fromTo(".launch__ship", { y: 160 }, { y: -320, ease: "none", scrollTrigger: { trigger: ".launch", start: "top bottom", end: "bottom top", scrub: true } });
-    gsap.fromTo(".launch__thrust", { scaleY: .3, opacity: .2 }, { scaleY: 1.4, opacity: .9, transformOrigin: "top", ease: "none", scrollTrigger: { trigger: ".launch", start: "top bottom", end: "bottom top", scrub: true } });
     gsap.from(".launch__mascot", { x: -120, opacity: 0, rotate: -10, duration: 1.4, ease: "expo.out", scrollTrigger: { trigger: ".launch", start: "top 60%", once: true } });
+  }
 
-    // Assinatura do rodapé desliza
-    gsap.fromTo(".base__sign", { xPercent: 8 }, { xPercent: -8, ease: "none", scrollTrigger: { trigger: ".base__sign", start: "top bottom", end: "bottom top", scrub: true } });
+  /* ---------- Animações CSS só rodam na seção visível ---------- */
+  function animationZones() {
+    const zones = $$("main > section, .tapes, .base");
+    const io = new IntersectionObserver((entries) => entries.forEach((e) => e.target.classList.toggle("in-view", e.isIntersecting)), { rootMargin: "120px 0px" });
+    zones.forEach((z) => { z.setAttribute("data-zone", ""); io.observe(z); });
   }
 
   /* ---------- Início ---------- */
@@ -619,8 +692,10 @@
   cursor();
   magnetic();
   updateDock();
+  animationZones();
 
   // Sem GSAP (falha de rede) a página aparece estática
   document.documentElement.classList.add("ready");
   choreography();
+  probeFps();
 })();
