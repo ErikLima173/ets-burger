@@ -530,17 +530,17 @@
     if (!finePointer || reduced || lite) return;
     document.documentElement.classList.add("has-cursor");
     onLite.push(() => document.documentElement.classList.remove("has-cursor"));
-    const c = $(".cursor"), dot = $(".cursor__dot"), ring = $(".cursor__ring"), label = $(".cursor__label");
+    const c = $(".cursor"), ring = $(".cursor__ring"), label = $(".cursor__label");
     let x = innerWidth / 2, y = innerHeight / 2, rx = x, ry = y, moving = false;
     // O anel só persegue o ponteiro enquanto ainda não o alcançou
     function chase() {
-      rx += (x - rx) * .2; ry += (y - ry) * .2;
+      rx += (x - rx) * .35; ry += (y - ry) * .35;
       ring.style.transform = `translate(${rx}px, ${ry}px)`;
       if (Math.abs(x - rx) > .3 || Math.abs(y - ry) > .3) requestAnimationFrame(chase);
       else moving = false;
     }
     addEventListener("pointermove", (e) => {
-      x = e.clientX; y = e.clientY; dot.style.transform = `translate(${x}px, ${y}px)`; c.classList.remove("is-hidden");
+      x = e.clientX; y = e.clientY; c.classList.remove("is-hidden");
       if (!moving) { moving = true; requestAnimationFrame(chase); }
     }, { passive: true });
     document.addEventListener("pointerleave", () => c.classList.add("is-hidden"));
