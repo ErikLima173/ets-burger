@@ -15,6 +15,7 @@ window.ETS_MENU = {
      "preco": 64.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780548.webp",
+     "fotoSm": "assets/menu/4780548-sm.webp",
      "maiores18": false
     }
    ]
@@ -30,6 +31,7 @@ window.ETS_MENU = {
      "preco": 51.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780552.webp",
+     "fotoSm": "assets/menu/4780552-sm.webp",
      "maiores18": false
     },
     {
@@ -39,6 +41,7 @@ window.ETS_MENU = {
      "preco": 37.5,
      "aPartirDe": false,
      "foto": "assets/menu/4780555.webp",
+     "fotoSm": "assets/menu/4780555-sm.webp",
      "maiores18": false
     },
     {
@@ -48,6 +51,7 @@ window.ETS_MENU = {
      "preco": 36.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780559.webp",
+     "fotoSm": "assets/menu/4780559-sm.webp",
      "maiores18": false
     },
     {
@@ -57,6 +61,7 @@ window.ETS_MENU = {
      "preco": 41.5,
      "aPartirDe": false,
      "foto": "assets/menu/4780568.webp",
+     "fotoSm": "assets/menu/4780568-sm.webp",
      "maiores18": false
     },
     {
@@ -66,6 +71,7 @@ window.ETS_MENU = {
      "preco": 33.9,
      "aPartirDe": true,
      "foto": "assets/menu/4780577.webp",
+     "fotoSm": "assets/menu/4780577-sm.webp",
      "maiores18": false
     },
     {
@@ -75,6 +81,7 @@ window.ETS_MENU = {
      "preco": 4.9,
      "aPartirDe": true,
      "foto": "assets/menu/4826460.webp",
+     "fotoSm": "assets/menu/4826460-sm.webp",
      "maiores18": false
     }
    ]
@@ -90,6 +97,7 @@ window.ETS_MENU = {
      "preco": 29.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780664.webp",
+     "fotoSm": "assets/menu/4780664-sm.webp",
      "maiores18": false
     },
     {
@@ -99,6 +107,7 @@ window.ETS_MENU = {
      "preco": 32.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780585.webp",
+     "fotoSm": "assets/menu/4780585-sm.webp",
      "maiores18": false
     },
     {
@@ -108,6 +117,7 @@ window.ETS_MENU = {
      "preco": 36.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780578.webp",
+     "fotoSm": "assets/menu/4780578-sm.webp",
      "maiores18": false
     },
     {
@@ -117,6 +127,7 @@ window.ETS_MENU = {
      "preco": 41.5,
      "aPartirDe": false,
      "foto": "assets/menu/4780593.webp",
+     "fotoSm": "assets/menu/4780593-sm.webp",
      "maiores18": false
     },
     {
@@ -126,6 +137,7 @@ window.ETS_MENU = {
      "preco": 26.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780598.webp",
+     "fotoSm": "assets/menu/4780598-sm.webp",
      "maiores18": false
     },
     {
@@ -135,6 +147,7 @@ window.ETS_MENU = {
      "preco": 72.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780638.webp",
+     "fotoSm": "assets/menu/4780638-sm.webp",
      "maiores18": false
     },
     {
@@ -144,6 +157,7 @@ window.ETS_MENU = {
      "preco": 37.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780648.webp",
+     "fotoSm": "assets/menu/4780648-sm.webp",
      "maiores18": false
     },
     {
@@ -153,6 +167,7 @@ window.ETS_MENU = {
      "preco": 29.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780656.webp",
+     "fotoSm": "assets/menu/4780656-sm.webp",
      "maiores18": false
     }
    ]
@@ -168,6 +183,7 @@ window.ETS_MENU = {
      "preco": 37.5,
      "aPartirDe": false,
      "foto": "assets/menu/4780672.webp",
+     "fotoSm": "assets/menu/4780672-sm.webp",
      "maiores18": false
     },
     {
@@ -177,6 +193,7 @@ window.ETS_MENU = {
      "preco": 37.5,
      "aPartirDe": false,
      "foto": "assets/menu/4780678.webp",
+     "fotoSm": "assets/menu/4780678-sm.webp",
      "maiores18": false
     },
     {
@@ -186,6 +203,7 @@ window.ETS_MENU = {
      "preco": 39.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780688.webp",
+     "fotoSm": "assets/menu/4780688-sm.webp",
      "maiores18": false
     },
     {
@@ -195,6 +213,7 @@ window.ETS_MENU = {
      "preco": 33.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780698.webp",
+     "fotoSm": "assets/menu/4780698-sm.webp",
      "maiores18": false
     }
    ]
@@ -210,6 +229,7 @@ window.ETS_MENU = {
      "preco": 51.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780706.webp",
+     "fotoSm": "assets/menu/4780706-sm.webp",
      "maiores18": false
     },
     {
@@ -219,6 +239,7 @@ window.ETS_MENU = {
      "preco": 51.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780712.webp",
+     "fotoSm": "assets/menu/4780712-sm.webp",
      "maiores18": false
     },
     {
@@ -228,6 +249,7 @@ window.ETS_MENU = {
      "preco": 49.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780720.webp",
+     "fotoSm": "assets/menu/4780720-sm.webp",
      "maiores18": false
     },
     {
@@ -237,6 +259,7 @@ window.ETS_MENU = {
      "preco": 46.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780730.webp",
+     "fotoSm": "assets/menu/4780730-sm.webp",
      "maiores18": false
     },
     {
@@ -246,6 +269,7 @@ window.ETS_MENU = {
      "preco": 58.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780740.webp",
+     "fotoSm": "assets/menu/4780740-sm.webp",
      "maiores18": false
     },
     {
@@ -255,6 +279,7 @@ window.ETS_MENU = {
      "preco": 50.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780746.webp",
+     "fotoSm": "assets/menu/4780746-sm.webp",
      "maiores18": false
     },
     {
@@ -264,6 +289,7 @@ window.ETS_MENU = {
      "preco": 53.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780748.webp",
+     "fotoSm": "assets/menu/4780748-sm.webp",
      "maiores18": false
     },
     {
@@ -273,6 +299,7 @@ window.ETS_MENU = {
      "preco": 55.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780751.webp",
+     "fotoSm": "assets/menu/4780751-sm.webp",
      "maiores18": false
     }
    ]
@@ -288,6 +315,7 @@ window.ETS_MENU = {
      "preco": 36.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780756.webp",
+     "fotoSm": "assets/menu/4780756-sm.webp",
      "maiores18": false
     }
    ]
@@ -303,6 +331,7 @@ window.ETS_MENU = {
      "preco": 29.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780757.webp",
+     "fotoSm": "assets/menu/4780757-sm.webp",
      "maiores18": false
     },
     {
@@ -312,6 +341,7 @@ window.ETS_MENU = {
      "preco": 32.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780760.webp",
+     "fotoSm": "assets/menu/4780760-sm.webp",
      "maiores18": false
     },
     {
@@ -321,6 +351,7 @@ window.ETS_MENU = {
      "preco": 26.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780766.webp",
+     "fotoSm": "assets/menu/4780766-sm.webp",
      "maiores18": false
     }
    ]
@@ -336,6 +367,7 @@ window.ETS_MENU = {
      "preco": 17.9,
      "aPartirDe": true,
      "foto": "assets/menu/4780772.webp",
+     "fotoSm": "assets/menu/4780772-sm.webp",
      "maiores18": false
     },
     {
@@ -345,6 +377,7 @@ window.ETS_MENU = {
      "preco": 26.9,
      "aPartirDe": true,
      "foto": "assets/menu/4780774.webp",
+     "fotoSm": "assets/menu/4780774-sm.webp",
      "maiores18": false
     },
     {
@@ -354,6 +387,7 @@ window.ETS_MENU = {
      "preco": 10.9,
      "aPartirDe": true,
      "foto": "assets/menu/4780777.webp",
+     "fotoSm": "assets/menu/4780777-sm.webp",
      "maiores18": false
     },
     {
@@ -363,6 +397,7 @@ window.ETS_MENU = {
      "preco": 18.9,
      "aPartirDe": true,
      "foto": "assets/menu/4780779.webp",
+     "fotoSm": "assets/menu/4780779-sm.webp",
      "maiores18": false
     }
    ]
@@ -378,6 +413,7 @@ window.ETS_MENU = {
      "preco": 4.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780819.webp",
+     "fotoSm": "assets/menu/4780819-sm.webp",
      "maiores18": false
     },
     {
@@ -387,6 +423,7 @@ window.ETS_MENU = {
      "preco": 4.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780820.webp",
+     "fotoSm": "assets/menu/4780820-sm.webp",
      "maiores18": false
     },
     {
@@ -396,6 +433,7 @@ window.ETS_MENU = {
      "preco": 4.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780822.webp",
+     "fotoSm": "assets/menu/4780822-sm.webp",
      "maiores18": false
     },
     {
@@ -405,6 +443,7 @@ window.ETS_MENU = {
      "preco": 3.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780825.webp",
+     "fotoSm": "assets/menu/4780825-sm.webp",
      "maiores18": false
     },
     {
@@ -414,6 +453,7 @@ window.ETS_MENU = {
      "preco": 4.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780826.webp",
+     "fotoSm": "assets/menu/4780826-sm.webp",
      "maiores18": false
     },
     {
@@ -423,6 +463,7 @@ window.ETS_MENU = {
      "preco": 13.7,
      "aPartirDe": false,
      "foto": "assets/menu/4780827.webp",
+     "fotoSm": "assets/menu/4780827-sm.webp",
      "maiores18": false
     }
    ]
@@ -438,6 +479,7 @@ window.ETS_MENU = {
      "preco": 14.9,
      "aPartirDe": false,
      "foto": null,
+     "fotoSm": null,
      "maiores18": false
     },
     {
@@ -447,6 +489,7 @@ window.ETS_MENU = {
      "preco": 14.9,
      "aPartirDe": true,
      "foto": null,
+     "fotoSm": null,
      "maiores18": false
     },
     {
@@ -456,6 +499,7 @@ window.ETS_MENU = {
      "preco": 14.9,
      "aPartirDe": false,
      "foto": null,
+     "fotoSm": null,
      "maiores18": false
     }
    ]
@@ -471,6 +515,7 @@ window.ETS_MENU = {
      "preco": 7.4,
      "aPartirDe": false,
      "foto": "assets/menu/4780815.webp",
+     "fotoSm": "assets/menu/4780815-sm.webp",
      "maiores18": false
     },
     {
@@ -480,6 +525,7 @@ window.ETS_MENU = {
      "preco": 7.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780816.webp",
+     "fotoSm": "assets/menu/4780816-sm.webp",
      "maiores18": false
     },
     {
@@ -489,6 +535,7 @@ window.ETS_MENU = {
      "preco": 7.9,
      "aPartirDe": true,
      "foto": "assets/menu/4780818.webp",
+     "fotoSm": "assets/menu/4780818-sm.webp",
      "maiores18": false
     }
    ]
@@ -504,6 +551,7 @@ window.ETS_MENU = {
      "preco": 8.4,
      "aPartirDe": false,
      "foto": "assets/menu/4780780.webp",
+     "fotoSm": "assets/menu/4780780-sm.webp",
      "maiores18": false
     },
     {
@@ -513,6 +561,7 @@ window.ETS_MENU = {
      "preco": 19.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780781.webp",
+     "fotoSm": "assets/menu/4780781-sm.webp",
      "maiores18": false
     },
     {
@@ -522,6 +571,7 @@ window.ETS_MENU = {
      "preco": 8.4,
      "aPartirDe": false,
      "foto": "assets/menu/4780783.webp",
+     "fotoSm": "assets/menu/4780783-sm.webp",
      "maiores18": false
     },
     {
@@ -531,6 +581,7 @@ window.ETS_MENU = {
      "preco": 19.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780784.webp",
+     "fotoSm": "assets/menu/4780784-sm.webp",
      "maiores18": false
     },
     {
@@ -540,6 +591,7 @@ window.ETS_MENU = {
      "preco": 8.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780785.webp",
+     "fotoSm": "assets/menu/4780785-sm.webp",
      "maiores18": false
     },
     {
@@ -549,6 +601,7 @@ window.ETS_MENU = {
      "preco": 4.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780786.webp",
+     "fotoSm": "assets/menu/4780786-sm.webp",
      "maiores18": false
     },
     {
@@ -558,6 +611,7 @@ window.ETS_MENU = {
      "preco": 8.4,
      "aPartirDe": false,
      "foto": "assets/menu/4780787.webp",
+     "fotoSm": "assets/menu/4780787-sm.webp",
      "maiores18": false
     },
     {
@@ -567,6 +621,7 @@ window.ETS_MENU = {
      "preco": 8.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780788.webp",
+     "fotoSm": "assets/menu/4780788-sm.webp",
      "maiores18": false
     },
     {
@@ -576,6 +631,7 @@ window.ETS_MENU = {
      "preco": 4.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780789.webp",
+     "fotoSm": "assets/menu/4780789-sm.webp",
      "maiores18": false
     },
     {
@@ -585,6 +641,7 @@ window.ETS_MENU = {
      "preco": 4.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780790.webp",
+     "fotoSm": "assets/menu/4780790-sm.webp",
      "maiores18": false
     },
     {
@@ -594,6 +651,7 @@ window.ETS_MENU = {
      "preco": 12.4,
      "aPartirDe": false,
      "foto": "assets/menu/4780792.webp",
+     "fotoSm": "assets/menu/4780792-sm.webp",
      "maiores18": false
     },
     {
@@ -603,6 +661,7 @@ window.ETS_MENU = {
      "preco": 8.4,
      "aPartirDe": false,
      "foto": "assets/menu/4780793.webp",
+     "fotoSm": "assets/menu/4780793-sm.webp",
      "maiores18": false
     },
     {
@@ -612,6 +671,7 @@ window.ETS_MENU = {
      "preco": 8.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780794.webp",
+     "fotoSm": "assets/menu/4780794-sm.webp",
      "maiores18": false
     },
     {
@@ -621,6 +681,7 @@ window.ETS_MENU = {
      "preco": 8.4,
      "aPartirDe": false,
      "foto": "assets/menu/4780796.webp",
+     "fotoSm": "assets/menu/4780796-sm.webp",
      "maiores18": false
     },
     {
@@ -630,6 +691,7 @@ window.ETS_MENU = {
      "preco": 12.4,
      "aPartirDe": false,
      "foto": "assets/menu/4780797.webp",
+     "fotoSm": "assets/menu/4780797-sm.webp",
      "maiores18": false
     },
     {
@@ -639,6 +701,7 @@ window.ETS_MENU = {
      "preco": 12.4,
      "aPartirDe": false,
      "foto": "assets/menu/4780799.webp",
+     "fotoSm": "assets/menu/4780799-sm.webp",
      "maiores18": false
     },
     {
@@ -648,6 +711,7 @@ window.ETS_MENU = {
      "preco": 8.4,
      "aPartirDe": false,
      "foto": "assets/menu/4780800.webp",
+     "fotoSm": "assets/menu/4780800-sm.webp",
      "maiores18": false
     },
     {
@@ -657,6 +721,7 @@ window.ETS_MENU = {
      "preco": 19.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780801.webp",
+     "fotoSm": "assets/menu/4780801-sm.webp",
      "maiores18": false
     },
     {
@@ -666,6 +731,7 @@ window.ETS_MENU = {
      "preco": 8.9,
      "aPartirDe": false,
      "foto": null,
+     "fotoSm": null,
      "maiores18": false
     },
     {
@@ -675,6 +741,7 @@ window.ETS_MENU = {
      "preco": 8.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780803.webp",
+     "fotoSm": "assets/menu/4780803-sm.webp",
      "maiores18": false
     },
     {
@@ -684,6 +751,7 @@ window.ETS_MENU = {
      "preco": 21.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780805.webp",
+     "fotoSm": "assets/menu/4780805-sm.webp",
      "maiores18": true
     },
     {
@@ -693,6 +761,7 @@ window.ETS_MENU = {
      "preco": 12.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780808.webp",
+     "fotoSm": "assets/menu/4780808-sm.webp",
      "maiores18": false
     },
     {
@@ -702,6 +771,7 @@ window.ETS_MENU = {
      "preco": 10.9,
      "aPartirDe": false,
      "foto": null,
+     "fotoSm": null,
      "maiores18": false
     },
     {
@@ -711,6 +781,7 @@ window.ETS_MENU = {
      "preco": 16.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780810.webp",
+     "fotoSm": "assets/menu/4780810-sm.webp",
      "maiores18": true
     },
     {
@@ -720,6 +791,7 @@ window.ETS_MENU = {
      "preco": 12.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780811.webp",
+     "fotoSm": "assets/menu/4780811-sm.webp",
      "maiores18": true
     },
     {
@@ -729,6 +801,7 @@ window.ETS_MENU = {
      "preco": 4.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780812.webp",
+     "fotoSm": "assets/menu/4780812-sm.webp",
      "maiores18": false
     },
     {
@@ -738,6 +811,7 @@ window.ETS_MENU = {
      "preco": 4.9,
      "aPartirDe": false,
      "foto": "assets/menu/4780813.webp",
+     "fotoSm": "assets/menu/4780813-sm.webp",
      "maiores18": false
     },
     {
@@ -747,6 +821,7 @@ window.ETS_MENU = {
      "preco": 4.9,
      "aPartirDe": false,
      "foto": "assets/menu/4783298.webp",
+     "fotoSm": "assets/menu/4783298-sm.webp",
      "maiores18": false
     },
     {
@@ -756,6 +831,7 @@ window.ETS_MENU = {
      "preco": 8.4,
      "aPartirDe": false,
      "foto": "assets/menu/4783301.webp",
+     "fotoSm": "assets/menu/4783301-sm.webp",
      "maiores18": false
     },
     {
@@ -765,6 +841,7 @@ window.ETS_MENU = {
      "preco": 12.4,
      "aPartirDe": false,
      "foto": "assets/menu/4783304.webp",
+     "fotoSm": "assets/menu/4783304-sm.webp",
      "maiores18": false
     },
     {
@@ -774,6 +851,7 @@ window.ETS_MENU = {
      "preco": 19.9,
      "aPartirDe": false,
      "foto": "assets/menu/4783307.webp",
+     "fotoSm": "assets/menu/4783307-sm.webp",
      "maiores18": false
     },
     {
@@ -783,6 +861,7 @@ window.ETS_MENU = {
      "preco": 8.4,
      "aPartirDe": false,
      "foto": "assets/menu/4783308.webp",
+     "fotoSm": "assets/menu/4783308-sm.webp",
      "maiores18": false
     },
     {
@@ -792,6 +871,7 @@ window.ETS_MENU = {
      "preco": 12.4,
      "aPartirDe": false,
      "foto": "assets/menu/4783312.webp",
+     "fotoSm": "assets/menu/4783312-sm.webp",
      "maiores18": false
     },
     {
@@ -801,6 +881,7 @@ window.ETS_MENU = {
      "preco": 19.9,
      "aPartirDe": false,
      "foto": "assets/menu/4783313.webp",
+     "fotoSm": "assets/menu/4783313-sm.webp",
      "maiores18": false
     },
     {
@@ -810,6 +891,7 @@ window.ETS_MENU = {
      "preco": 8.4,
      "aPartirDe": false,
      "foto": "assets/menu/4783315.webp",
+     "fotoSm": "assets/menu/4783315-sm.webp",
      "maiores18": false
     },
     {
@@ -819,6 +901,7 @@ window.ETS_MENU = {
      "preco": 10.9,
      "aPartirDe": false,
      "foto": null,
+     "fotoSm": null,
      "maiores18": false
     },
     {
@@ -828,6 +911,7 @@ window.ETS_MENU = {
      "preco": 19.9,
      "aPartirDe": false,
      "foto": null,
+     "fotoSm": null,
      "maiores18": false
     }
    ]
@@ -843,6 +927,7 @@ window.ETS_MENU = {
      "preco": 19.9,
      "aPartirDe": false,
      "foto": null,
+     "fotoSm": null,
      "maiores18": false
     },
     {
@@ -852,6 +937,7 @@ window.ETS_MENU = {
      "preco": 19.9,
      "aPartirDe": false,
      "foto": null,
+     "fotoSm": null,
      "maiores18": false
     },
     {
@@ -861,6 +947,7 @@ window.ETS_MENU = {
      "preco": 19.9,
      "aPartirDe": false,
      "foto": null,
+     "fotoSm": null,
      "maiores18": false
     }
    ]

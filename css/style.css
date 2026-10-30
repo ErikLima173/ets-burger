@@ -11,7 +11,7 @@
   --blue: #35D9FF;
   --white: #F4F4F4;
   --muted: rgba(244, 244, 244, .7);
-  --faint: rgba(244, 244, 244, .45);
+  --faint: rgba(244, 244, 244, .6);
   --line: rgba(244, 244, 244, .12);
   --line-2: rgba(53, 217, 255, .28);
 
@@ -775,7 +775,8 @@ main, .base { position: relative; z-index: 2; }
 
 /* ---------- Revelações (estado inicial só com JS) ---------- */
 .js .reveal { opacity: 0; transform: translateY(40px); }
-.js:not(.ready) .hero__copy, .js:not(.ready) .stage, .js:not(.ready) .hero__planets { opacity: 0; }
+/* Só os enfeites esperam o JS; texto, burger e botões aparecem na primeira pintura */
+.js:not(.ready) .hero__planets, .js:not(.ready) .stage__ufo, .js:not(.ready) .stage__beam, .js:not(.ready) .award, .js:not(.ready) .orbiter { opacity: 0; }
 
 /* =========================================================
    RESPONSIVO

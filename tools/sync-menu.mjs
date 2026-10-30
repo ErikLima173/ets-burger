@@ -25,14 +25,20 @@ function minPrice(item) {
   return total > 0 ? { preco: Math.round(total * 100) / 100, aPartirDe: true } : null;
 }
 
+const exists = (f) => fs.access(f).then(() => true, () => false);
+
+// Duas versões: 640px para os cards e 160px para miniaturas (listas e sacola)
 async function saveImage(url, id) {
   const file = path.join(IMG_DIR, `${id}.webp`);
-  try { await fs.access(file); return `assets/menu/${id}.webp`; } catch {}
-  const res = await fetch(url);
-  if (!res.ok) return null;
-  const buf = Buffer.from(await res.arrayBuffer());
-  await sharp(buf).resize({ width: 640, withoutEnlargement: true }).webp({ quality: 80 }).toFile(file);
-  return `assets/menu/${id}.webp`;
+  const small = path.join(IMG_DIR, `${id}-sm.webp`);
+  if (!(await exists(file))) {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const buf = Buffer.from(await res.arrayBuffer());
+    await sharp(buf).resize({ width: 640, withoutEnlargement: true }).webp({ quality: 80 }).toFile(file);
+  }
+  if (!(await exists(small))) await sharp(file).resize({ width: 160 }).webp({ quality: 74 }).toFile(small);
+  return { foto: `assets/menu/${id}.webp`, fotoSm: `assets/menu/${id}-sm.webp` };
 }
 
 const res = await fetch(API, { headers: { company: "ets_burger" } });
@@ -48,13 +54,13 @@ for (const c of cats) {
     if (i.status !== "ACTIVE" || i.kind === "combo" || /\(c[óo]pia\)/i.test(i.name)) continue;
     const p = minPrice(i);
     if (!p) continue;
-    const foto = i.image_url ? await saveImage(i.image_url, i.id) : null;
+    const img = (i.image_url && (await saveImage(i.image_url, i.id))) || { foto: null, fotoSm: null };
     itens.push({
       id: String(i.id),
       nomeOriginal: i.name.trim(),
       descricao: clean(i.description),
       ...p,
-      foto,
+      ...img,
       maiores18: i.adults_only || /maiores de 18/i.test(i.description || "")
     });
   }

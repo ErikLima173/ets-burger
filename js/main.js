@@ -16,7 +16,8 @@
      Máquina fraca começa no modo leve. As demais medem o FPS na entrada
      e caem para o modo leve se não aguentarem. ?lite e ?full forçam um modo. */
   const params = new URLSearchParams(location.search);
-  const weakHardware = (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4 || !!(navigator.connection && navigator.connection.saveData);
+  // Celular e tablet também começam leves: poupa bateria e deixa a rolagem lisa
+  const weakHardware = (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4 || !!(navigator.connection && navigator.connection.saveData) || matchMedia("(pointer: coarse)").matches;
   let lite = params.has("full") ? false : params.has("lite") || reduced || weakHardware;
   const onLite = [];
   function goLite() {
@@ -254,7 +255,7 @@
   }
 
   function rowHTML(p) {
-    const thumb = p.foto ? `<img src="${p.foto}" alt="" width="72" height="72" loading="lazy" decoding="async">` : `<span class="row__code">${code(p)}</span>`;
+    const thumb = p.foto ? `<img src="${p.fotoSm || p.foto}" alt="" width="72" height="72" loading="lazy" decoding="async">` : `<span class="row__code">${code(p)}</span>`;
     return `<li class="row" data-id="${p.id}">
       <div class="row__thumb">${thumb}</div>
       <div class="row__info"><b>${p.nome}</b>${p.subtitulo || p.descricao ? `<span>${p.subtitulo || p.descricao}</span>` : ""}${p.etiqueta ? `<em>${p.etiqueta}</em>` : ""}</div>
@@ -326,7 +327,7 @@
     $$("[data-open-bag]").forEach((el) => el.setAttribute("aria-label", `Abrir sacola, ${count} ${count === 1 ? "item" : "itens"}`));
     $("[data-bag-list]").innerHTML = ids.map((k) => {
       const p = PRODUCTS[k];
-      const thumb = p.foto ? `<img class="bag__thumb" src="${p.foto}" alt="">` : `<span class="bag__thumb bag__thumb--x">${code(p)}</span>`;
+      const thumb = p.foto ? `<img class="bag__thumb" src="${p.fotoSm || p.foto}" alt="">` : `<span class="bag__thumb bag__thumb--x">${code(p)}</span>`;
       return `<li class="bag__item">${thumb}<div><b>${p.nome}</b><small>${p.aPartirDe ? "a partir de " : ""}${brl(p.preco * bag[k])}</small></div>
         <div class="qty"><button type="button" data-qty="-1" data-id="${k}" aria-label="Remover um ${p.nome}">−</button><span>${bag[k]}</span><button type="button" data-qty="1" data-id="${k}" aria-label="Adicionar um ${p.nome}">+</button></div></li>`;
     }).join("");
@@ -357,7 +358,7 @@
       const a = src.getBoundingClientRect(), b = target.getBoundingClientRect();
       const fly = document.createElement("div");
       fly.className = "flyer";
-      fly.innerHTML = p.foto ? `<img src="${p.foto}" alt="">` : "";
+      fly.innerHTML = p.foto ? `<img src="${p.fotoSm || p.foto}" alt="">` : "";
       document.body.appendChild(fly);
       const sx = a.left + a.width / 2 - 35, sy = a.top + a.height / 2 - 35;
       const ex = b.left + b.width / 2 - 35, ey = b.top + b.height / 2 - 35;
@@ -606,17 +607,15 @@
     gsap.registerPlugin(ScrollTrigger);
     $$(revealSel).forEach((el) => el.classList.add("reveal"));
 
-    // Entrada do hero: céu, título, nave, feixe e burger, nessa ordem
+    // Entrada do hero: texto, burger e botões já chegam prontos (aparecem na hora);
+    // só a cena em volta entra animada: céu, nave chegando e feixe ligando
     const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
     tl.from(".planet", { scale: .5, opacity: 0, duration: 2, stagger: .15 }, 0)
       .from(".nebula", { opacity: 0, duration: 2 }, 0)
-      .from(".hero__title .w", { yPercent: 70, opacity: 0, rotate: 3, duration: 1.1, stagger: .07 }, .15)
-      .from(".stage__ufo", { y: -260, x: 120, rotate: -14, opacity: 0, duration: 1.5, ease: "power4.out" }, .3)
-      .from(".stage__beam", { opacity: 0, duration: .5, ease: "steps(4)" }, 1.15)
-      .from(".porthole", { y: 160, scale: .6, opacity: 0, duration: 1.4 }, 1.2)
-      .from(".status, .hero__sub, .hero__ctas > *, .hero__facts li", { y: 26, opacity: 0, duration: .9, stagger: .07 }, .7)
-      .from(".award, .orbiter, .hud", { scale: .4, opacity: 0, duration: 1, stagger: .08, ease: "back.out(1.8)", clearProps: "scale" }, 1.6)
-      .from(".scroll-cue", { opacity: 0, duration: .8 }, 2);
+      .from(".stage__ufo", { y: -260, x: 120, rotate: -14, opacity: 0, duration: 1.5, ease: "power4.out" }, .1)
+      .from(".stage__beam", { opacity: 0, duration: .5, ease: "steps(4)" }, .9)
+      .from(".award, .orbiter, .hud", { scale: .4, opacity: 0, duration: 1, stagger: .08, ease: "back.out(1.8)", clearProps: "scale" }, 1.1)
+      .from(".scroll-cue", { opacity: 0, duration: .8 }, 1.6);
 
     // Efeitos presos ao scroll: recalculam a cada rolagem, então o modo leve não usa
     const scrubs = [];
