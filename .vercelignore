@@ -1,3 +1,4 @@
 tools
 .claude
 node_modules
+.env*
