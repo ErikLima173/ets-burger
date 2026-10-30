@@ -432,9 +432,28 @@
   }
   const stars = (n, cls = "") => Array.from({ length: 5 }, (_, i) => `<svg class="${i < n ? "" : "off"} ${cls}"><use href="#i-star"/></svg>`).join("");
 
+  // Sem depoimentos autorizados, a lista vira canais para ler os relatos reais
+  function reviewChannels() {
+    const ch = [
+      { tag: "Fonte da nota", titulo: "Relatos no iFood", texto: `Onde os clientes deram a nota ${D.avaliacoes.notaGeral.valor.toFixed(1).replace(".", ",")}.`, href: D.links.ifood, cta: "Ler no iFood", icon: "i-star" },
+      { tag: "Mapa estelar", titulo: "Relatos no Google", texto: "Avaliações públicas da base em Jarinu.", href: D.links.mapa, cta: "Ler no Google", icon: "i-pin" },
+      { tag: "Frequência aberta", titulo: "Mande o seu", texto: `Provou? Marque ${D.links.instagramUser} e conte como foi a sua abdução.`, href: D.links.instagram, cta: "Abrir Instagram", icon: "i-insta" }
+    ];
+    return ch.map((c) => `
+      <a class="msg msg--channel is-real" href="${c.href}" target="_blank" rel="noopener">
+        <span class="msg__sig">${c.tag}</span>
+        <svg class="msg__icon" aria-hidden="true"><use href="#${c.icon}"/></svg>
+        <b class="msg__title">${c.titulo}</b>
+        <p>${c.texto}</p>
+        <span class="link-arrow mono">${c.cta} <svg aria-hidden="true"><use href="#i-arrow"/></svg></span>
+      </a>`).join("");
+  }
+
   function renderReviews() {
     const r = D.avaliacoes;
-    $("[data-review-list]").innerHTML = r.itens.map((a, i) => `
+    const list = $("[data-review-list]");
+    list.classList.toggle("transmissions__list--channels", !r.itens.length);
+    list.innerHTML = !r.itens.length ? reviewChannels() : r.itens.map((a, i) => `
       <article class="msg${r.demo ? "" : " is-real"}">
         <div class="msg__head">${avatar(a.nome)}<div class="msg__who"><b>${a.nome}</b><span>${a.cidade}</span></div></div>
         <div class="msg__stars" role="img" aria-label="Nota ${a.nota} de 5">${stars(a.nota)}</div>

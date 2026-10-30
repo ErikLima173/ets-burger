@@ -639,6 +639,13 @@ main, .base { position: relative; z-index: 2; }
 .msg__stars .off { color: #2a3050; }
 .msg p { color: var(--muted); font-size: .95rem; }
 .msg__sig { font: .66rem var(--f-mono); color: var(--faint); letter-spacing: .1em; text-transform: uppercase; margin-top: auto; }
+.transmissions__list--channels { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.msg--channel { text-decoration: none; transition: border-color .3s, background .3s, transform .4s var(--ease); }
+.msg--channel .msg__sig { margin-top: 0; color: var(--blue); }
+.msg--channel .link-arrow { margin-top: auto; }
+.msg--channel:hover { border-color: var(--green); background: #121730; transform: translateY(-4px); }
+.msg__icon { width: 40px; height: 40px; color: var(--green); }
+.msg__title { font: 900 clamp(1.8rem, 2.4vw, 2.3rem)/.95 var(--f-display); text-transform: uppercase; }
 
 /* ---------- CTA FINAL ---------- */
 .launch { position: relative; padding: clamp(140px, 16vw, 220px) 0 clamp(80px, 10vw, 140px); overflow: clip; text-align: left; }

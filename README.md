@@ -26,7 +26,8 @@ npm run sync
 
 Isso regenera `js/menu.js` e baixa fotos novas para `assets/menu/`. Depois é só fazer commit e push.
 
-## Antes de divulgar
+## Depoimentos
 
-- As avaliações em `js/data.js` são exemplos de demonstração. Troque por relatos reais e mude `demo` para `false`.
-- Confirme a fonte da nota 4,9 (`notaGeral.fonte`).
+A nota (4,9 no iFood) fica em `avaliacoes.notaGeral` no `js/data.js`. A lista `avaliacoes.itens` está vazia de propósito:
+nesse caso a seção mostra links para os relatos reais no iFood, Google e Instagram.
+Para exibir depoimentos no site, adicione apenas os que o cliente autorizou.

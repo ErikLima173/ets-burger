@@ -69,18 +69,13 @@ window.ETS = {
     "4780577": { nome: "Batata Suprema", subtitulo: "Costela desfiada e Catupiry", etiqueta: "MAIS PEDIDO" },
     "4826460": { descricao: "Maionese verde, maionese da casa, molho espacial, ranch e barbecue." },
   },
-  // ATENÇÃO: avaliações abaixo são DEMONSTRATIVAS.
-  // Troque por avaliações reais (Google, iFood) com autorização dos clientes
-  // e mude "demo" para false.
   avaliacoes: {
-    // Nota real informada pela casa. "fonte" aparece ao lado da nota (ex.: "iFood", "Google").
-    notaGeral: { valor: 4.9, fonte: "" },
-    demo: true,
-    itens: [
-      { nome: "Humano de exemplo 01", cidade: "Jarinu, SP", nota: 5, texto: "Espaço reservado para uma avaliação real. Aqui entra o comentário de um cliente sobre o lanche que pediu." },
-      { nome: "Humano de exemplo 02", cidade: "Atibaia, SP", nota: 5, texto: "Espaço reservado para uma avaliação real. Troque este texto no arquivo js/data.js." },
-      { nome: "Humano de exemplo 03", cidade: "Campo Limpo Paulista, SP", nota: 4, texto: "Espaço reservado para uma avaliação real. Use comentários autorizados pelos clientes." },
-      { nome: "Humano de exemplo 04", cidade: "Jundiaí, SP", nota: 5, texto: "Espaço reservado para uma avaliação real. Pode vir do Google, do iFood ou do Instagram." }
-    ]
+    // Nota real da casa no iFood
+    notaGeral: { valor: 4.9, fonte: "iFood" },
+    demo: false,
+    // Depoimentos só com autorização do cliente. Enquanto a lista estiver vazia,
+    // a seção mostra links para os relatos reais no iFood, Google e Instagram.
+    // Formato: { nome: "Ana", cidade: "Jarinu, SP", nota: 5, texto: "..." }
+    itens: []
   }
 };
